@@ -4,11 +4,12 @@ package Date::Formatter;
 use strict;
 use warnings;
 
-our $VERSION = '0.07';
+our $VERSION = '0.08';
 
 use Scalar::Util qw(blessed);
 
 use Time::Local ();
+use DateTime::Locale;
 
 ## overload operators
 use overload (
@@ -19,11 +20,6 @@ use overload (
 	'+'   => "add",
 	'-'   => "subtract"
 	);
-
-## class constants
-# date name constants
-use constant DAYS => [ qw(Sunday Monday Tuesday Wednesday Thursday Friday Saturday) ];
-use constant MONTHS => [ qw(January February March April May June July August September October November December) ]; 
 
 ### constructor
 
@@ -38,8 +34,9 @@ sub new {
 
 
 sub now {
-    pop @_ if scalar(@_) > 1;
-    goto &new;
+    my ( $self, %date ) = @_;
+    my $locale = $date{locale} || 'en';
+    return $self->new( locale => $locale );
 }
 
 sub _init {
@@ -48,11 +45,14 @@ sub _init {
 	$self->{abbreviateMonths} = 0;
 	$self->{abbreviateDays} = 0;
 	$self->{formatter} = undef;
-	$self->{internal} = [];
-	$self->{elements} = undef;
+	$self->{internal} = undef;
+	$self->{elements} = [];
 	$self->{am_or_pm} = undef;
 	$self->{gmt_offset_hours} = undef;
 	$self->{gmt_offset_minutes}	= undef;
+
+    $self->setLocale( delete $date{locale} );
+
     if (%date) {      
         # we let Time::Local do the range checking
         # on these values here,.. 
@@ -84,6 +84,17 @@ sub _init {
     else {
         $self->_setTime(time());
     }
+}
+
+sub setLocale {
+    my $self = shift;
+    my ($locale) = @_;
+
+    $locale ||= 'en';
+
+    $self->{locale} = DateTime::Locale->load( $locale );
+
+    return;
 }
 
 ## alternate constructor 
@@ -354,9 +365,9 @@ sub getDayOfMonth {
 sub getMonth {
 	my ($self) = @_;
 	if ($self->{abbreviateMonths} == 1){
-		return (MONTHS->[$self->{elements}->[4]] =~ /(...)/);	
+        return $self->{locale}->month_abbreviations->[$self->{elements}[4]];
 	}
-	return MONTHS->[$self->{elements}->[4]];
+    return $self->{locale}->month_names->[$self->{elements}[4]];
 }
 
 sub getNumericMonth {
@@ -381,10 +392,21 @@ sub getYear {
 
 sub getDayOfWeek {
 	my ($self) = @_;
+
+    my @days;
 	if ($self->{abbreviateDays} == 1){
-		return (DAYS->[$self->{elements}->[6]] =~ /(...)/);	
+        @days = @{$self->{locale}->day_abbreviations};
 	}
-	return DAYS->[$self->{elements}->[6]];
+    else {
+        @days = @{$self->{locale}->day_names};
+    }
+
+    # DateTime::Locale has Monday as the first day. This module
+    # uses Sunday. So, move the last item to the front, so @days
+    # is now Sunday -> Saturday instead of Monday -> Sunday.
+    unshift(@days, pop(@days));
+
+	return $days[$self->{elements}->[6]];
 }
 
 sub getDayOfWeekIndex {
@@ -414,7 +436,12 @@ sub pack {
 sub unpack {
 	# this is an alternate constructor 
 	my ($class, $packed_string) = @_;
-	return _setTime($class->new(), $packed_string);
+	my $obj = _setTime($class->new(), $packed_string);
+
+    #Uncomment if you want clones to clone the locale, as well
+    #$obj->{locale} = $self->{locale};
+
+    return $obj;
 }
 
 ## printing
@@ -632,6 +659,10 @@ Returns the formatter subroutine, so you can share between multiple B<Date::Form
 =item B<setDateFormatter ($func)>
 
 Sets the formatter routine, this is how one would share that formatter routine mentioned above.
+
+=item B<setLocale ($locale)>
+
+Sets (or resets) the locale. The default is 'en'.
 
 =back
 

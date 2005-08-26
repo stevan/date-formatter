@@ -7,6 +7,7 @@ WriteMakefile(
 		'Test::More'      => 0.47,
 		'Test::Exception' => 0.15,
         'Scalar::Util'    => 1.10,
-        'Time::Local'     => 1.06
+        'Time::Local'     => 1.06,
+        'DateTime::Locale' => 0.01,
 		}
 );

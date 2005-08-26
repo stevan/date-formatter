@@ -1,5 +1,8 @@
 Revision history for Perl extension Date-Formatter.
 
+0.08 Fri  Aug 26 2005
+    - Added localization support via DateTime::Locale
+
 0.07 Tues Nov 30 2004
     - forgot to add the new test to the MANIFEST
     - forgot to add the date to the Changes file

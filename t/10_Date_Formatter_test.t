@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 29;
+use Test::More tests => 27;
 
 BEGIN { 
     use_ok('Date::Formatter')
@@ -78,10 +78,6 @@ cmp_ok($date->getGMTOffsetHours(), '==', ($date->getHours() - $gmt_hours),
 	   '... the GMT hours offset');
 cmp_ok($date->getGMTOffsetMinutes(), '==', ($date->getMinutes() - $gmt_minutes), 
 	   '... the GMT minutes offset');
-
-is($date->MONTHS()->[$date->getMonthIndex()], $date->getMonth(), '... these should match');
-
-is($date->DAYS()->[$date->getDayOfWeekIndex()], $date->getDayOfWeek(), '... these should match');
 
 cmp_ok($date->getDayOfYear(), '==', (localtime)[7], '... test day of year');
 
