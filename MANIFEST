@@ -1,0 +1,13 @@
+Changes
+Makefile.PL
+MANIFEST
+README
+lib/Date/Formatter.pm
+t/10_Date_Formatter_test.t
+t/20_Date_Formatter_overloads_test.t
+t/30_Date_Formatter_formatter_test.t
+t/40_Date_Formatter_serialization_test.t
+t/50_Date_Formatter_interval_test.t
+t/60_Date_Formatter_set_date_test.t
+t/pod.t
+t/pod_coverage.t
