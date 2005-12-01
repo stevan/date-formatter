@@ -860,13 +860,15 @@ Are both wrappers/helpers/extensions around the C<localtime> and C<gmttime> func
 
 =back
 
-=head1 AUTHOR
+=head1 AUTHORS
 
-stevan little, E<lt>stevan@iinteractive.comE<gt>
+Stevan Little, E<lt>stevan@iinteractive.comE<gt>
+
+Rob Kinyon, E<lt>rob@iinteractive.comE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2004 by Infinity Interactive, Inc.
+Copyright 2004, 2005 by Infinity Interactive, Inc.
 
 L<http://www.iinteractive.com>
 
