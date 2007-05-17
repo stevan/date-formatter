@@ -24,7 +24,7 @@ ok(overload::Method($date, '<=>'), '... overload <=>');
 
 my $other_date = $date;
 # test the operators
-cmp_ok($date, '==', $other_date, '... they should logically be equal then');
+ok($date == $other_date, '... they should logically be equal then');
 ok(!($date != $other_date), '... they are equal so they shouldnt show up as not equal');	
 cmp_ok(($date <=> $other_date), '==', 0, '... they are equal so they should produce 1 when compared with <=>');	
 # test that the operators and the methods that implement 
@@ -58,7 +58,7 @@ cmp_ok((($date->getSeconds() + 100) % 60), '==', $later_date->getSeconds(),
 # test the compare functions again
 
 ok(!($date == $later_date), '... they should logically not be equal then');
-cmp_ok($date, '!=', $later_date, '... they should logically be not equal then');
+ok($date != $later_date, '... they should logically be not equal then');
 cmp_ok(($date <=> $later_date), '==', -1, '... they should logically be the same');	 
 
 # now go back to the - operator test	   

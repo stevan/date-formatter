@@ -4,7 +4,7 @@ package Date::Formatter;
 use strict;
 use warnings;
 
-our $VERSION = '0.08';
+our $VERSION = '0.09';
 
 use Scalar::Util qw(blessed);
 
@@ -868,7 +868,7 @@ Rob Kinyon, E<lt>rob@iinteractive.comE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2004, 2005 by Infinity Interactive, Inc.
+Copyright (C) 2004-2007 Infinity Interactive, Inc.
 
 L<http://www.iinteractive.com>
 

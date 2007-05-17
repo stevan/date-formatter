@@ -1,5 +1,12 @@
 Revision history for Perl extension Date-Formatter.
 
+0.09 Thurs. May 17, 2007
+    - get rid of some annoying test failures which 
+      are caused by Test::More upgrades, they were
+      totally harmless, but I am getting sick of 
+      typing `force install ...` in the CPAN prompt
+      all the time ;)
+
 0.08 Fri  Aug 26 2005
     - Added localization support via DateTime::Locale
 

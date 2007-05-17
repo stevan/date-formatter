@@ -1,4 +1,4 @@
-Date::Formatter version 0.08
+Date::Formatter version 0.09
 ===========================
 
 INSTALLATION
@@ -16,10 +16,11 @@ This module requires these other modules and libraries:
 
 	Scalar::Util
     Time::Local
+    DateTime::Locale
 
 COPYRIGHT AND LICENCE
 
-Copyright (C) 2004, 2005 Infinity Interactive, Inc.
+Copyright (C) 2004-2007 Infinity Interactive, Inc.
 
 http://www.iinteractive.com
 
