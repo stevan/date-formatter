@@ -365,9 +365,9 @@ sub getDayOfMonth {
 sub getMonth {
 	my ($self) = @_;
 	if ($self->{abbreviateMonths} == 1){
-        return $self->{locale}->month_abbreviations->[$self->{elements}[4]];
+        return $self->{locale}->month_format_abbreviated->[$self->{elements}[4]];
 	}
-    return $self->{locale}->month_names->[$self->{elements}[4]];
+    return $self->{locale}->month_format_wide->[$self->{elements}[4]];
 }
 
 sub getNumericMonth {
@@ -395,10 +395,10 @@ sub getDayOfWeek {
 
     my @days;
 	if ($self->{abbreviateDays} == 1){
-        @days = @{$self->{locale}->day_abbreviations};
+        @days = @{$self->{locale}->day_format_abbreviated};
 	}
     else {
-        @days = @{$self->{locale}->day_names};
+        @days = @{$self->{locale}->day_format_wide};
     }
 
     # DateTime::Locale has Monday as the first day. This module
