@@ -4,8 +4,6 @@ package Date::Formatter;
 use strict;
 use warnings;
 
-our $VERSION = '0.09';
-
 use Scalar::Util qw(blessed);
 
 use Time::Local ();
