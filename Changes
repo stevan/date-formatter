@@ -1,5 +1,9 @@
 Revision history for Perl extension Date-Formatter.
 
+0.10 Wed. Septmember 4, 2013
+   - update DateTime::Locale method calls to quiet down warnings.
+   - convert to dist zilla
+
 0.09 Thurs. May 17, 2007
     - get rid of some annoying test failures which 
       are caused by Test::More upgrades, they were
